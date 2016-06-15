@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="hu" ng-app='resultApp'>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Visszajelzések</title>
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="app.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Admin Panel</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="#">Home</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container" ng-controller="RestultsTableContoller as results">
+      <h3>Ők jeleztek vissza eddig:</h3>
+      
+      <div class="row">
+        <div class="col-md-7">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Attending</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="result in results.resultsData">
+                <td>{{result.name}}</td>
+                <td>{{result.email}}</td>
+                <td>{{result.guests}}</td>
+                <td>
+                  <button type="button" class="btn btn-xs btn-primary" ng-click="results.toggleDetail($index)">
+                    <span class="glyphicon glyphicon-chevron-right" ng-show="results.showDetail != $index"></span>
+                    <span class="glyphicon glyphicon-chevron-left" ng-hide="results.showDetail != $index"></span>
+                  </button>
+
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <div id="results-sidebar" class="col-md-5">
+          <div id="result-summary-page" ng-hide="results.showDetail != -1">
+            <div class="panel panel-default">
+              <div class="panel-heading"><b>Summary</b></div>
+              <div class="panel-body panel-body-nopad">
+                <table class="table table-bordered">
+                  <tr>
+                    <th>Attendants</th>
+                    <td>40</td>
+                  </tr>
+                  <tr>
+                    <th>Diet Menus</th>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <th>Car</th>
+                    <td>38</td>
+                  </tr>
+                  <tr>
+                    <th>Bus</th>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <th>Train</th>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <th>SzKiraly</th>
+                    <td>20</td>
+                  </tr>
+                  <tr>
+                    <th>Fenyo</th>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <th>Park</th>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <th>Siesta</th>
+                    <td>0</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div id="rsvp-detail-page" ng-show="results.showDetail != -1">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                Details
+                <button type="button" class="btn btn-xs btn-danger pull-right" ng-click="results.toggleDetail(-1)">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </button>
+              </div>
+              <div class="panel-body panel-body-nopad">
+                <table class="table table-bordered">
+                  <tr>
+                    <th>Name</th>
+                    <td>{{results.resultsData[results.showDetail].name}}</td>
+                  </tr>
+                  <tr>
+                    <th>Email</th>
+                    <td>{{results.resultsData[results.showDetail].email}}</td>
+                  </tr>
+                  <tr>
+                    <th>Mobile</th>
+                    <td>{{results.resultsData[results.showDetail].mobile}}</td>
+                  </tr>
+                  <tr>
+                    <th>Guests</th>
+                    <td>{{results.resultsData[results.showDetail].guests}}</td>
+                  </tr>
+                  <tr>
+                    <th>Diet Menu</th>
+                    <td>{{results.resultsData[results.showDetail].food.vegetarian}}</td>
+                  </tr>
+                  <tr>
+                    <th>Hotel</th>
+                    <td>{{results.resultsData[results.showDetail].accomodation.hotel}}</td>
+                  </tr>
+                  <tr>
+                    <th>Hotel from</th>
+                    <td>{{results.resultsData[results.showDetail].accomodation.from}}</td>
+                  </tr>
+                  <tr>
+                    <th>Hotel to</th>
+                    <td>{{results.resultsData[results.showDetail].accomodation.to}}</td>
+                  </tr>
+                </table>
+                
+                <code ng-show="results.showRawData">
+                  {{results.resultsData[results.showDetail]}}
+                </code>
+                
+              </div>
+              <div class="panel-footer text-right">
+                <button type="button" class="btn btn-xs btn-warning" ng-click="results.toggleRawData()">
+                  <span class="glyphicon glyphicon-info-sign"></span>
+                </button>
+                <button type="button" class="btn btn-xs btn-danger">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script type="text/javascript" src="app/app.js"></script>
+    
+  </body>
+</html>
