@@ -33,37 +33,45 @@
       
       <div class="row">
         <div class="col-md-7">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Attending</th>
-                <th>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="result in results.resultsData">
-                <td>{{result.name}}</td>
-                <td>{{result.email}}</td>
-                <td>{{result.guests}}</td>
-                <td>
-                  <button type="button" class="btn btn-xs btn-primary" ng-click="results.toggleDetail($index)">
-                    <span class="glyphicon glyphicon-chevron-right" ng-show="results.showDetail != $index"></span>
-                    <span class="glyphicon glyphicon-chevron-left" ng-hide="results.showDetail != $index"></span>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                <button type="button" class="btn btn-xs btn-success" ng-click="results.refreshResults()">
+                  <span class="glyphicon glyphicon-refresh"></span>
+                </button>
+                <b>RSVP List</b>
+              </div>
+              <div class="panel-body panel-body-nopad">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Attending</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="result in results.resultsData">
+                      <td>{{result.name}}</td>
+                      <td>{{result.email}}</td>
+                      <td>{{result.guests}}</td>
+                      <td>
+                        <button type="button" class="btn btn-xs btn-primary" ng-click="results.toggleDetail($index)">
+                          <span class="glyphicon glyphicon-chevron-right" ng-show="results.showDetail != $index"></span>
+                          <span class="glyphicon glyphicon-chevron-left" ng-hide="results.showDetail != $index"></span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+
         </div>
         <div id="results-sidebar" class="col-md-5">
           <div id="result-summary-page" ng-hide="results.showDetail != -1">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <button type="button" class="btn btn-xs btn-success" ng-click="results.refreshResults()">
-                  <span class="glyphicon glyphicon-refresh"></span>
-                </button>
                 <b>Summary</b>
               </div>
               <div class="panel-body panel-body-nopad">
@@ -87,31 +95,66 @@
                     <td>2</td>
                   </tr>
                   <tr>
-                    <th>Car</th>
+                    <th>
+                      <button type="button" class="btn btn-xs btn-primary" ng-click="results.filterResults(results.filter_car)">
+                        <span class="glyphicon glyphicon-filter"></span>
+                      </button>
+                      Car
+                    </th>
                     <td>38</td>
                   </tr>
                   <tr>
-                    <th>Bus</th>
+                    <th>
+                      <button type="button" class="btn btn-xs btn-primary" ng-click="results.filterResults(results.filter_bus)">
+                        <span class="glyphicon glyphicon-filter"></span>
+                      </button>
+                      Bus
+                    </th>
                     <td>0</td>
                   </tr>
                   <tr>
-                    <th>Train</th>
+                    <th>
+                      <button type="button" class="btn btn-xs btn-primary" ng-click="results.filterResults(results.filter_train)">
+                        <span class="glyphicon glyphicon-filter"></span>
+                      </button>
+                      Train
+                    </th>
                     <td>2</td>
                   </tr>
                   <tr>
-                    <th>SzKiraly</th>
+                    <th>
+                      <button type="button" class="btn btn-xs btn-primary" ng-click="results.filterResults(results.filter_szkiraly)">
+                        <span class="glyphicon glyphicon-filter"></span>
+                      </button>
+                      SzKiraly
+                    </th>
                     <td>20</td>
                   </tr>
                   <tr>
-                    <th>Fenyo</th>
+                    <th>
+                      <button type="button" class="btn btn-xs btn-primary" ng-click="results.filterResults(results.filter_fenyo)">
+                        <span class="glyphicon glyphicon-filter"></span>
+                      </button>
+                      Fenyo
+                    </th>
                     <td>0</td>
                   </tr>
                   <tr>
-                    <th>Park</th>
+                    <th>
+                      <button type="button" class="btn btn-xs btn-primary" ng-click="results.filterResults(results.filter_park)">
+                        <span class="glyphicon glyphicon-filter"></span>
+                      </button>
+                      Park
+                    </th>
                     <td>2</td>
                   </tr>
                   <tr>
-                    <th>Siesta</th>
+                    <th>
+                      <button type="button" class="btn btn-xs btn-primary" ng-click="results.filterResults(results.filter_siesta)">
+                        <span class="glyphicon glyphicon-filter"></span>
+                      </button>
+                      Siesta
+                    </th>
                     <td>0</td>
                   </tr>
                 </table>
@@ -121,7 +164,7 @@
           <div id="rsvp-detail-page" ng-show="results.showDetail != -1">
             <div class="panel panel-default">
               <div class="panel-heading">
-                Details
+                <b>Details</b>
                 <button type="button" class="btn btn-xs btn-danger pull-right" ng-click="results.toggleDetail(-1)">
                   <span class="glyphicon glyphicon-remove"></span>
                 </button>
