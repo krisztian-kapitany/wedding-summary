@@ -8,11 +8,26 @@ angular.module('resultApp', []).controller('RestultsTableContoller', function($h
   this.refreshResults = function(){
     $http.get("http://beataeskrisztian.hu/rest/rsvps")
       .then(function(response) {
-        console.log(response.data);
         this.resultsData = response.data;
       }.bind(this));
   }.bind(this);
   this.refreshResults();
+  
+  this.filter_attending= function(entry){
+    return entry.attending === "true";
+  };
+  
+  this.filter_diet = function(entry){
+    return entry.food.vegetarian > 0;
+  };
+  
+  //Filtering General
+  this.filteredResults = [];
+  
+  this.filterResults = function(filter_func){
+    this.resultsData = this.resultsData.filter(filter_func);
+  }.bind(this);
+
   
   //Toggle deatils panel instead of summary panel
   this.showDetail = -1;

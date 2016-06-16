@@ -52,25 +52,38 @@
                     <span class="glyphicon glyphicon-chevron-right" ng-show="results.showDetail != $index"></span>
                     <span class="glyphicon glyphicon-chevron-left" ng-hide="results.showDetail != $index"></span>
                   </button>
-
                 </td>
               </tr>
-
             </tbody>
           </table>
         </div>
         <div id="results-sidebar" class="col-md-5">
           <div id="result-summary-page" ng-hide="results.showDetail != -1">
             <div class="panel panel-default">
-              <div class="panel-heading"><b>Summary</b></div>
+              <div class="panel-heading">
+                <button type="button" class="btn btn-xs btn-success" ng-click="results.refreshResults()">
+                  <span class="glyphicon glyphicon-refresh"></span>
+                </button>
+                <b>Summary</b>
+              </div>
               <div class="panel-body panel-body-nopad">
                 <table class="table table-bordered">
                   <tr>
-                    <th>Attendants</th>
+                    <th>
+                      <button type="button" class="btn btn-xs btn-primary" ng-click="results.filterResults(results.filter_attending)">
+                        <span class="glyphicon glyphicon-filter"></span>
+                      </button>
+                      Attendants
+                    </th>
                     <td>40</td>
                   </tr>
                   <tr>
-                    <th>Diet Menus</th>
+                    <th>
+                      <button type="button" class="btn btn-xs btn-primary" ng-click="results.filterResults(results.filter_diet)">
+                        <span class="glyphicon glyphicon-filter"></span>
+                      </button>
+                      Diet Menus
+                    </th>
                     <td>2</td>
                   </tr>
                   <tr>
