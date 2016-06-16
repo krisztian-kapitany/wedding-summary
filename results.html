@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hu" ng-app='resultApp'>
+<html lang="hu" ng-app='resultsApp'>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,7 @@
 
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link href="app.css" rel="stylesheet">
+    <link href="results.css" rel="stylesheet">
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -66,8 +66,8 @@
                 </table>
               </div>
           </div>
-
         </div>
+
         <div id="results-sidebar" class="col-md-5">
           <div id="result-summary-page" ng-hide="results.showDetail != -1">
             <div class="panel panel-default">
@@ -219,16 +219,13 @@
                 </button>
               </div>
             </div>
-
           </div>
-
         </div>
-        
       </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript" src="app/results-app.js"></script>
     
   </body>
 </html>

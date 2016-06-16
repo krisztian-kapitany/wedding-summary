@@ -1,6 +1,6 @@
-var myApp = angular.module('resultApp', []);
+var resultsApp = angular.module('resultsApp', []);
 
-angular.module('resultApp', []).controller('RestultsTableContoller', function($http){
+angular.module('resultsApp', []).controller('RestultsTableContoller', function($http){
   
   //Fetching rsvp data from REST Api
   this.resultsData = [];
