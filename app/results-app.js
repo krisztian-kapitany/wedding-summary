@@ -4,17 +4,47 @@ angular.module('resultsApp', []).controller('RestultsTableContoller', function($
   
   //Fetching rsvp data from REST Api
   this.resultsData = [];
-  
+    
   this.refreshResults = function(){
     $http.get("http://beataeskrisztian.hu/rest/rsvps")
       .then(function(response) {
         this.resultsData = response.data;
+        
+        this.totalAttendants = 0;
+        this.dietMenus = 0;
+        this.withCar = 0;
+        this.withBus = 0;
+        this.withTrain = 0;
+        this.inSzkiraly = 0;
+        this.inFenyo = 0;
+        this.inPark = 0;
+        this.inSiesta = 0;
+        
+        for(i in this.resultsData)
+        {
+          var rsvp = this.resultsData[i];
+          
+          if(this.filter_attending(rsvp)){
+            this.totalAttendants += parseInt(rsvp.guests);
+            this.dietMenus += parseInt(rsvp.food.vegetarian);
+            
+            if(this.filter_szkiraly(rsvp)) this.inSzkiraly += parseInt(rsvp.guests);
+            if(this.filter_park(rsvp)) this.inPark += parseInt(rsvp.guests);
+            if(this.filter_fenyo(rsvp)) this.inFenyo += parseInt(rsvp.guests);
+            if(this.filter_siesta(rsvp)) this.inSiesta += parseInt(rsvp.guests);
+            
+            if(this.filter_car(rsvp)) this.withCar += parseInt(rsvp.guests);
+            if(this.filter_bus(rsvp)) this.withBus += parseInt(rsvp.guests);
+            if(this.filter_train(rsvp)) this.withTrain += parseInt(rsvp.guests);
+          }
+        }
+        
       }.bind(this));
   }.bind(this);
   this.refreshResults();
   
   //Specific filter functions
-  this.filter_attending= function(entry){
+  this.filter_attending = function(entry){
     return entry.attending === "true";
   };
   
